@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Adivinhe o Número - Arcade Game</title>
+</head>
+<body>
+    <main class="arcade-card">
+        
+        <header class="top-bar">
+            <div class="player-profile">
+                <div class="avatar-ring">
+                    <svg viewBox=" 0 0 24 24" width="20" height="20">
+                        <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z" fill="#C084FC"/>
+                    </svg>
+                    <span class="level-badge">5</span>
+                </div>
+            </div>
+            <div class="stat-pill streak-pill">
+                <svg viewBox="0 0 16 16" width="14" height="14">
+                    <path d="M8 1c0 0 4 3.5 4 7 0 3.5-2.5 6-5.5 6S1 11.5 1 8c0-2.5 2-4.5 3.5-6 0 0 0 2 1.5 3C7.5 6 8 1 8 1z" fill="#F59E0B"/>
+                    <path d="M6.5 13c1.5 0 3-1.5 3-3.5 0-1.5-1-2.5-2-3 0 0 0 1-1 1.5S5 9 5 10.5C5 12 5.5 13 6.5 13z" fill="#FDE047"/>
+                </svg>
+                <span id="streak-counter">3x COMBO</span>
+            </div>
+            <div class="stat-pill gems-pill">
+                <svg viewBox="0 0 18 18" width="14" height="14">
+                    <polygon points="5,1 13,1 17,6 9,17 1,6" fill="#22D3EE"/>
+                    <polygon points="5,1 13,1 15,6 3,6" fill="#E0F2FE" opacity="0.6"/>
+                </svg>
+                <span id="gems-counter">1,420</span>
+            </div>
+            <!-- Botao de Alternar Audio -->
+            <button type="button" id="btn-audio" class="icon-btn" title="Alternar Som" aria-label="Som">
+                <svg viewBox="0 0 20 20" width="16" height="16">
+                    <polygon points="2,7 6,7 11,2 11,18 6,13 2,13" fill="#CBD5E1"/>
+                    <path d="M14 6q3 4 0 8" stroke="#38BDF8" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Seção de vidas Restantes -->
+        <!-- shortcut: 5 corações fixos acoplados a lives = 5 no JS; gerar via JS se criar níveis de dificuldade -->
+        <div class="lives-container">
+            <span class="label-muted">VIDAS RESTANTES</span>
+            <div class="hearts-row" id="hearts-row">
+                <span class="heart active">&hearts;</span>
+                <span class="heart active">&hearts;</span>
+                <span class="heart active">&hearts;</span>
+                <span class="heart active">&hearts;</span>
+                <span class="heart active">&hearts;</span>
+            </div>
+            <span class="lives-text" id="lives-counter">5/5</span>
+        </div>
+
+        <!-- Cartão do Mascote e Cofre Misterioso -->
+        <section class="vault-card">
+            <!-- Mascote Robô -->
+            <div class="robot-mascot" id="robot-mascot">
+                <div class="robot-antenna"></div>
+                <div class="robot-head">
+                    <div class="robot-visor">
+                        <span class="robot-eye"></span>
+                        <span class="robot-eye"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balão de Fala do Robô -->
+            <div class="speech-bubble" id="speech-bubble">
+                <span class="bubble-tag">DICA DO ROBÔ</span>
+                <p class="bubble-tip" id="robot-tip">"Faça seu primeiro chute!"</p>
+                <span class="bubble-sub" id="robot-sub">Escolha um número entre 1 e 100</span>
+            </div>
+
+            <!-- Cofre Misterioso -->
+            <div class="mystery-box">
+                <div class="vault-chassis">
+                    <span class="mystery-qmark" id="mystery-display">?</span>
+                </div>
+                <span class="range-badge">FAIXA: 1 A 100</span>
+            </div>
+        </section>
+
+        <!-- Termômetro de Proximidade -->
+        <section class="thermo-section">
+            <div class="thermo-header">
+                <span class="label-muted">TERMÔMETRO DO NÚMERO</span>
+                <span class="thermo-status" id="thermo-status">NEUTRO</span>
+            </div>
+            <div class="thermo-track">
+                <div class="thermo-pin" id="thermo-pin">50</div>
+            </div>
+            <div class="thermo-footer">
+                <span>1 (Frio)</span>
+                <span>100 (Quente)</span>
+            </div>
+        </section>
+
+        <!-- Área de Palpite e Controles -->
+        <section class="guess-chamber">
+            <!-- Mostrador de número -->
+            <div class="big-display-box">
+                <label for="guess-input" class="display-label">SEU PALPITE SELECIONADO</label>
+                <input type="number" id="guess-input" class="big-number" value="50" min="1" max="100">
+            </div>
+
+            <!-- Botões de Ajuste Rápido: data-step alimenta o cálculo dinâmico no JS sem criar listeners extras -->
+            <div class="step-buttons">
+                <button type="button" class="btn-step" data-step="-10">-10</button>
+                <button type="button" class="btn-step" data-step="-1">-1</button>
+                <button type="button" class="btn-step" data-step="1">+1</button>
+                <button type="button" class="btn-step" data-step="+10">+10</button>
+            </div>
+
+            <!-- Botão Principal de chutar -->
+            <button type="button" id="btn-submit" class="btn-3d">
+                <span>CHUTAR NÚMERO</span>
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M4 18l-3 4 5-2 3 3-1-5z" fill="#F59E0B"/>
+                    <path d="M14 2c0 0 4 3 4 9l-4 7-7-7 6-9z" fill="#FFFFFF"/>
+                    <circle cx="11" cy="9" r="2.5" fill="#06B6D4"/>
+                </svg>
+            </button>
+        </section>
+
+        <!-- Histórico de Palpites: chips iniciais servem apenas de preview visual no CSS e são limpos pelo JS ao iniciar -->
+        <section class="history-section">
+            <span class="label-muted">HISTÓRICO DE PALPITES</span>
+            <div class="history-chips" id="history-chips">
+                <span class="chip chip-up">20 ▲</span>
+                <span class="chip chip-down">85 ▼</span>
+                <span class="chip chip-up">35 ▲</span>
+                <span class="chip chip-current">50 ?</span>
+            </div>
+        </section>
+
+        <!-- Rodapé com Botão de Reiniciar -->
+        <footer class="game-footer">
+            <button type="button" id="btn-reset" class="btn-reset">
+                &#8635; NOVA PARTIDA / REINICIAR
+            </button>
+        </footer>
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+</html>

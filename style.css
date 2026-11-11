@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --bg-dark: #0E0B25;
+    --card-bg: #1C143F;
+    --border-purple: #3D3066;
+    --cyan: #06B6D4;
+    --purple: #A855F7;
+    --amber: #F59E0B;
+    --yellow: #FDE047;
+    --pink: #F43F5E;
+    --text-light: #F8FAFC;
+    --text-muted: #94A3B8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #070514;
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.arcade-card {
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(180deg, #0E0B25 0%, #030b25 50%, #09071a 100%);
+    border: 2px solid var(--border-purple);
+    border-radius: 36px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.label-muted {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* Barra Superior e Avatar */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.avatar-ring {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    background: #2c2057;
+    border: 2px solid var(--purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.level-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -6px;
+    background: var(--amber);
+    color: #000;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 1px 6px;
+    border-radius: 10px;
+}
+
+/* Pílula de Status e Botão de Som */
+.stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.streak-pill {
+    border: 1.5px solid var(--amber);
+    color: var(--yellow);
+}
+
+.gems-pill {
+    border: 1.5px solid var(--cyan);
+    color: #67e8f9;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Seção de vidas e corações */
+.lives-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hearts-row {
+    display: flex;
+    gap: 8px;
+}
+
+.heart {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #241b4b;
+    border: 1.5px solid var(--border-purple);
+    color: #475569;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.heart.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+}
+
+.lives-text {
+    color: var(--pink);
+    font-size: 15px;
+    font-weight: 900;
+}
+
+/* Cartão principal e mascote robô */
+/* flex-wrap permite que Robô + Balão dividam a 1ª linha e o Cofre (width: 100%) ocupe a 2ª linha sem div extra */
+.vault-card {
+    background: linear-gradient(145deg, rgba(36, 27, 80, 0.9), rgba(21, 15, 51, 0.85));
+    border: 2px solid var(--purple);
+    border-radius: 28px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+.robot-mascot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.robot-antenna {
+    width: 4px;
+    height: 10px;
+    background: var(--cyan);
+    border-radius: 4px;
+}
+
+.robot-head {
+    width: 64px;
+    height: 52px;
+    background: #2e2356;
+    border: 2.5px solid var(--cyan);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.robot-visor {
+    width: 46px;
+    height: 24px;
+    background: #09061a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+}
+
+.robot-eye {
+    width: 9px;
+    height: 9px;
+    background: #22d3ee;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #22d3ee;
+}
+
+/* Balão de fala do robô */
+.speech-bubble {
+    flex: 1;
+    background: var(--amber);
+    border-radius: 16px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bubble-tag {
+    color: #78350f;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.bubble-tip {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.bubble-sub {
+    color: #78350f;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Cofre Misterioso */
+.mystery-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.vault-chassis {
+    width: 110px;
+    height: 82px;
+    background: #140d33;
+    border: 3px solid var(--purple);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mystery-qmark {
+    color: var(--yellow);
+    font-size: 42px;
+    font-weight: 900;
+    text-shadow: 0 4px 12px rgba(253, 224, 71, 0.4);
+}
+
+.range-badge {
+    background: #0f0a29;
+    border: 1.5px solid var(--border-purple);
+    color: #a5b4fc;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 16px;
+    border-radius: 12px;
+}
+
+/* Termômetro do Número */
+.thermo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.thermo-header,
+.thermo-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-muted);
+}
+
+.thermo-status {
+    color: var(--yellow);
+}
+
+.thermo-track {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #3B82F6 0%, #06B6D4 35%, #F59E0B 65%, #EF4444 100%);
+}
+
+/* translateX(-50%) alinha o centro do pino (e não sua borda esquerda) exatamente sobre a coordenada left: N% */
+.thermo-pin {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--amber);
+    color: #000;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+}
+
+/* Área de Palpite de Mostrador */
+.guess-chamber {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.big-display-box {
+    background: #140f33;
+    border: 2px solid #4c3d8f;
+    border-radius: 24px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.display-label {
+    color: #818cf8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.big-number {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #38bdf8;
+    font-size: 44px;
+    font-weight: 900;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+/* Botões de ajuste e botão 3d principal */
+.step-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn-step {
+    height: 44px;
+    background: linear-gradient(180deg, #342866, #1E1642);
+    border: 1.5px solid #4c3d8f;
+    border-radius: 14px;
+    color: var(--text-light);
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.btn-3d {
+    height: 56px;
+    background: linear-gradient(180deg, #38BDF8 0%, #06B6D4 60%, #0891B2 100%);
+    border: none;
+    border-radius: 18px;
+    color: #042f2e;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 0 #0e7490, 0 10px 20px rgba(6, 182, 212, 0.35);
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.btn-3d:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #0e7490;
+}
+
+/* Histórico de palpiter e rodapé */
+.history-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: var(--card-bg);
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.chip-up {
+    border: 1.5px solid #3b82f6;
+    color: #93c5fd;
+}
+
+.chip-down {
+    border: 1.5px solid #EF4444;
+    color: #fca5a5;
+}
+
+.chip-current {
+    border: 1.5px solid var(--amber);
+    color: var(--yellow);
+}
+
+.btn-reset {
+    width: 100%;
+    height: 40px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-purple);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
